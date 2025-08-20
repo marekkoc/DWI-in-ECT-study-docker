@@ -3,9 +3,14 @@
 #    /input - input DICOM files
 #    /output - output DICOM files will be placed here
 
+echo "*************************"
+echo "Processing starts here..."
+echo "*************************"
+echo
+echo
 
 # DICOM to nifti conversion
-dcm2niix -f "%f_%p_%t_%s" -i y -p n -z n -o /output /input
+#dcm2niix -f "%f_%p_%t_%s" -i y -p n -z n -o /output /input
 
 # Planned functions
 #
