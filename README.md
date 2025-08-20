@@ -13,6 +13,9 @@ The example below uses eddy with CUDA, try eddy_cpu and remove some of the incom
 
 For the new data, it is more straight-forward as the flipped image is in seperate series and not upside-down.
 
+
+```matlab
+
 % DICOM to nifti conversion
 dcm2niix -f folder_name -i y -p n -z n output_folder "%f_%p_%t_%s"
 
@@ -39,3 +42,4 @@ bet2 correctedB0 correctedB0_brain -m -f 0.4
 
 %Run Eddy for distortion and movement correction using topup output
 eddy --imain=DTI_file--mask=mask_file --acqp=acqparams.txt --index=index.txt --bvecs=bvecs --bvals=bvals --topup=topup--out=eddy_corr_ --niter=8 --fwhm=10,8,4,2,0,0,0,0 --repol --ol_type=both --mporder=8 --s2v_niter=8 --slspec=my_slspec.txt
+```
