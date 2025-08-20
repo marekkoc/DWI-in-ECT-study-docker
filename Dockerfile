@@ -7,18 +7,18 @@ FROM continuumio/miniconda3
 # run with (in current folder):
 #    docker run --rm -it -v $(pwd)/input:/input -v $(pwd)/output:/output img-inv
 
-
+# run and enter to the container
+# docker run --rm -it --entrypoint bash -v $(pwd)/input:/input -v $(pwd)/output:/output img-inv
 
 # Set value to the name of your conda environment in requirements.yml.
 # Optional: provide it to docker build as a variable
 #    --build-arg conda_env="workflow_ai_test"
 #ARG conda_env=workflow_ai_test
+
 ARG conda_env
 ENV DEFAULT_CONDA_ENV=$conda_env
 
-
-
-# Aktualizacja systemu i instalacja podstawowych narzędzi
+# System update and installation needed tools
 RUN apt-get update && apt-get install -y \
     imagemagick dcm2niix file
     
@@ -28,7 +28,6 @@ COPY fsl/fslinstaller.py fsl/fsl-6.0.5.2-install.tar.gz /install/
 RUN conda create --name "$conda_env" python=2.7
 RUN sed -i 's/conda activate/conda activate '$conda_env'/g' /root/.bashrc
 
-    
 SHELL ["/bin/bash", "--login", "-c"]
 RUN python /install/fslinstaller.py -f /install/fsl-6.0.5.2-install.tar.gz -M -q -d /usr/local/fsl
 
